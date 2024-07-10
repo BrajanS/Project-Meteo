@@ -14,41 +14,42 @@
       </form>
       <section class="graph">
         <% if (meteo) { %>
-        <h1><%= ville.toUpperCase()  %></h1>
+        <h1><%= ville.toUpperCase() %></h1>
         <% } %>        
       </section>
 
       <section class="clock">
-        <%if(error){%>
-            <p><%=error%></p>
-        <%} else if(meteo){%>
+        <% if (error) { %>
+            <p><%= error %></p>
+        <% } else if (meteo) { %>
 
         <figure class="flipper">
-         <%if(meteo.weather[0].main === 'Clear'){%>
+         <% if (meteo.weather[0].main === 'Clear') { %>
           <span class="icon">2</span>
-         <%}else if(meteo.weather[0].main === 'Clouds'){%>
+         <% } else if (meteo.weather[0].main === 'Clouds') { %>
           <span class="icon">3</span>
-         <%}else if(meteo.weather[0].main === 'Tornado'){%>
+         <% } else if (meteo.weather[0].main === 'Tornado') { %>
           <span class="icon">4</span>
-         <%}else if(meteo.weather[0].main === 'Rain' || meteo.weather[0].main === 'Drizzle'){%>
+         <% } else if (meteo.weather[0].main === 'Rain' || meteo.weather[0].main === 'Drizzle') { %>
           <span class="icon">5</span>
-         <%}%>
+         <% } %>
         </figure>
         
         <figure class="flipper">
-            <span><%=Math.floor(meteo.main.temp)%></span>
+            <span><%= Math.floor(meteo.main.temp) %></span>
         </figure>
-        <%}%> 
+        <% } %> 
       </section>
       <div style="color: white; margin-left: 10px;">
-        <h4><br/>Pressure: <%= meteo.sys.country %></h4>
-        <h4>Humidity: <%= meteo.main.humidity %></h4>
-        <h4>Pressure: <%= meteo.main.pressure %></h4>
-        <h4>Sea level: <%= meteo.main.sea_level %></h1>
-        <h4>Ground level: <%= meteo.main.grnd_level %></h1>
-        <h4 style="color: orange;">Sunrise: <%= new Date(meteo.sys.sunrise * 1000).toLocaleTimeString() %></h4>
-        <h4 style="color: red;">Sunset: <%= new Date(meteo.sys.sunset * 1000).toLocaleTimeString() %></h4>
-
+        <% if (meteo) { %>
+          <h4>Country: <%= meteo.sys.country %></h4>
+          <h4>Humidity: <%= meteo.main.humidity %></h4>
+          <h4>Pressure: <%= meteo.main.pressure %></h4>
+          <h4>Sea level: <%= meteo.main.sea_level %></h4>
+          <h4>Ground level: <%= meteo.main.grnd_level %></h4>
+          <h4 style="color: orange;">Sunrise: <%= new Date(meteo.sys.sunrise * 1000).toLocaleTimeString() %></h4>
+          <h4 style="color: red;">Sunset: <%= new Date(meteo.sys.sunset * 1000).toLocaleTimeString() %></h4>
+        <% } %>
       </div>
     </section>
   </body>
